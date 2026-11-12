@@ -20,6 +20,98 @@ Build a **working, reproducible, explainable** synthetic lending data and decisi
 
 ---
 
+## 🌐 LIVE DASHBOARD - PRODUCTION DEPLOYMENT
+
+### ✨ **Access the Live Dashboard**
+
+**Primary Dashboard** (Professional HTML, Responsive):
+```
+🔗 https://yottaflex-loan-risk-platform.onrender.com
+```
+
+**Features**:
+- ✅ **3 Integrated Tabs**:
+  - 📊 **Portfolio Control Tower** - KPIs, decision distribution, affordability metrics
+  - 🔍 **Underwriting Workbench** - Application search, decision tracing, 8-rule engine
+  - ✅ **Data Quality Monitor** - Validation status, anomaly detection, reproducibility
+  
+- ✅ **Professional Banking UI**:
+  - Navy & Teal color scheme
+  - Responsive design (mobile, tablet, desktop)
+  - Dark & Light mode (auto-detects system preference)
+  - Smooth animations & interactive elements
+
+- ✅ **Live Data**:
+  - 65 loan applications generated on startup
+  - 100 applicants, 12 entities, 1,400+ records
+  - Real decision engine with 8-rule precedence
+  - Affordability calculations visible
+
+### 📊 **What You'll See on the Dashboard**
+
+**Portfolio Control Tower Tab**:
+```
+Total Applications: 65
+Approval Rate: 18.3% (11 approved / 60 regular)
+Manual Review: 49 applications
+Portfolio Value: ₹364L
+
+📊 Decision Distribution: Pie chart (Approved, Manual Review, Rejected)
+📈 Affordability Status: Bar chart (Affordable, Marginal, Not Affordable)
+🏆 Product Performance: Table with approval rates by product
+```
+
+**Underwriting Workbench Tab**:
+```
+🔎 Search Applications by ID (e.g., LOAN-2026-000045)
+📋 Filter by Status (All, Approved, Manual Review, Rejected)
+💰 Filter by Affordability (All, Affordable, Marginal, Not Affordable)
+
+Example Application: LOAN-2026-000045
+  Status: ✅ APPROVED
+  Affordability: 💚 AFFORDABLE
+  Amount: ₹8,50,000 | Term: 60 months
+  
+  Decision Details (Expandable):
+    - Monthly Income: ₹1,18,000
+    - Proposed EMI: ₹18,234
+    - DTI Ratio: 32.5%
+    - Decision: APPROVED (Rule 6: DTI ≤ 40%)
+    - All 8 Rules Explained
+```
+
+**Data Quality Monitor Tab**:
+```
+✅ Primary Keys: PASS (11/11 tables)
+✅ Foreign Keys: PASS (12/12 relationships)
+✅ Enums: PASS (9/9 categorical fields)
+✅ Schedule Reconciliation: PASS (±0.10 tolerance)
+
+Row Counts:
+  ✓ Applicants: 100
+  ✓ Loan Applications: 65 (60 + 5 anomalies)
+  ✓ Decisions: 60
+  ✓ Affordability Checks: 60
+  ✓ Repayment Schedules: 496 (approved only)
+  ✓ Documents: 240
+
+🚨 Anomalies: 5 injected scenarios with ground truth labels
+🔐 Reproducibility: Seed 20261112 (deterministic generation)
+```
+
+### 🚀 **Deployment Details**
+
+| Component | Details |
+|-----------|---------|
+| **Platform** | Render (free tier) |
+| **URL** | https://yottaflex-loan-risk-platform.onrender.com |
+| **Start Command** | `python serve_dashboard.py` |
+| **Server** | HTTP server serving HTML dashboard |
+| **Data Generation** | Automatic on startup (python generator.py) |
+| **Time to Load** | ~30 seconds first load (cold start), instant after |
+
+---
+
 ## Quick Start
 
 ### 1. Generate Synthetic Data
@@ -444,15 +536,67 @@ echo "  - Use data/*.csv as input to visualization, analysis, or downstream tool
 
 ---
 
+## 📱 Dashboard Options
+
+Your YottaFlex solution comes with **two professional dashboards**:
+
+### Option 1: **Responsive HTML Dashboard** (PRIMARY - Live on Render)
+**File**: `yottaflex_responsive_dashboard.html`  
+**Type**: Standalone HTML with Chart.js  
+**Access**: 
+- Live: https://yottaflex-loan-risk-platform.onrender.com
+- Local: Double-click the HTML file to open in browser
+
+**Advantages**:
+- ✅ No server setup needed for local viewing
+- ✅ Professional banking UI (Navy + Teal)
+- ✅ Responsive design (mobile, tablet, desktop)
+- ✅ Dark & Light mode support
+- ✅ Smooth animations
+- ✅ Works offline
+
+### Option 2: **Streamlit Interactive Dashboard**
+**File**: `yottaflex_unified_dashboard.py`  
+**Type**: Interactive Streamlit app  
+**Run Locally**:
+```bash
+pip install -r requirements.txt
+streamlit run yottaflex_unified_dashboard.py
+```
+
+**Advantages**:
+- ✅ Interactive widgets (search, filters, expandable sections)
+- ✅ Real-time data updates
+- ✅ Sidebar with quick stats
+- ✅ Professional Streamlit styling
+
+---
+
+## Deployment Scripts
+
+Your repository includes startup scripts for easy deployment:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `serve_dashboard.py` | Serves HTML dashboard via HTTP | **Render**: `python serve_dashboard.py` |
+| `startup.py` | Generates data then starts Streamlit | Local dev: `python startup.py` |
+| `startup.sh` | Bash startup script (alternative) | Linux/Mac: `./startup.sh` |
+
+---
+
 ## Contact & Support
 
 **Project**: YottaFlex Loan Risk Platform  
 **Author**: Claude AI (Haiku 4.5) with human review  
 **Date**: November 12, 2026  
-**Status**: Submission-ready (P0 complete; P1/P2 optional)
+**Status**: ✅ **PRODUCTION READY - LIVE ON RENDER**
+
+**Live Dashboard**: https://yottaflex-loan-risk-platform.onrender.com  
+**GitHub Repository**: https://github.com/SathwikaBhutham/yottaflex-loan-risk-platform
 
 For questions on implementation decisions, schema design, or anomaly scenarios, refer to:
 - [DATA_DICTIONARY.md](DATA_DICTIONARY.md) - detailed field and rule definitions
 - [REQUIREMENTS_COMPARISON.md](REQUIREMENTS_COMPARISON.md) - requirements traceability
+- [FINAL_VERIFICATION.md](FINAL_VERIFICATION.md) - complete requirement verification (12-point checklist)
 - Source code comments in `generator.py` and `validate.py`
 
