@@ -556,46 +556,46 @@ class Generator:
                 writer = csv.DictWriter(f, fieldnames=data[0].keys())
                 writer.writeheader()
                 writer.writerows(data)
-            print(f"✓ {filename}: {len(data)} rows")
+            print(f"[OK] {filename}: {len(data)} rows")
 
     def run(self):
         """Execute full generation pipeline."""
         print("Generating synthetic loan data...")
         self.generate_applicants()
-        print(f"✓ {len(self.applicants)} applicants")
+        print(f"[OK] {len(self.applicants)} applicants")
 
         self.generate_employment()
-        print(f"✓ {len(self.employments)} employment records")
+        print(f"[OK] {len(self.employments)} employment records")
 
         self.generate_income()
-        print(f"✓ {len(self.incomes)} income records")
+        print(f"[OK] {len(self.incomes)} income records")
 
         self.generate_credit_facilities()
-        print(f"✓ {len(self.facilities)} credit facilities")
+        print(f"[OK] {len(self.facilities)} credit facilities")
 
         self.generate_applications()
-        print(f"✓ {len(self.applications)} loan applications")
+        print(f"[OK] {len(self.applications)} loan applications")
 
         self.generate_documents()
-        print(f"✓ {len(self.documents)} documents")
+        print(f"[OK] {len(self.documents)} documents")
 
         self.generate_affordability_checks()
-        print(f"✓ {len(self.affordability_checks)} affordability checks")
+        print(f"[OK] {len(self.affordability_checks)} affordability checks")
 
         self.generate_decisions()
-        print(f"✓ {len(self.decisions)} decisions")
+        print(f"[OK] {len(self.decisions)} decisions")
 
         self.generate_repayment_schedules()
-        print(f"✓ {len(self.schedules)} schedule records")
+        print(f"[OK] {len(self.schedules)} schedule records")
 
         self.generate_events()
-        print(f"✓ {len(self.events)} application events")
+        print(f"[OK] {len(self.events)} application events")
 
         self.generate_disbursements()
-        print(f"✓ {len(self.disbursements)} disbursements")
+        print(f"[OK] {len(self.disbursements)} disbursements")
 
         self.inject_anomalies()
-        print(f"✓ {len(self.anomalies['scenarios'])} anomalies injected")
+        print(f"[OK] {len(self.anomalies['scenarios'])} anomalies injected")
 
         return self
 
@@ -603,4 +603,4 @@ if __name__ == "__main__":
     gen = Generator()
     gen.run()
     gen.export_csv()
-    print("\n✓ Generation complete!")
+    print("\n[OK] Generation complete!")

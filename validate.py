@@ -17,7 +17,7 @@ def load_csv(filename):
         with open(filename, "r") as f:
             return list(csv.DictReader(f))
     except FileNotFoundError:
-        print(f"✗ File not found: {filename}")
+        print(f"[FAIL] File not found: {filename}")
         return []
 
 def validate_primary_keys():
@@ -46,10 +46,10 @@ def validate_primary_keys():
 
         ids = [row[pk_col] for row in data]
         if len(ids) != len(set(ids)):
-            print(f"✗ {filename}: Duplicate PKs found")
+            print(f"[FAIL] {filename}: Duplicate PKs found")
             all_ok = False
         else:
-            print(f"✓ {filename}: {len(ids)} unique PKs")
+            print(f"[OK] {filename}: {len(ids)} unique PKs")
 
     return all_ok
 
@@ -80,98 +80,98 @@ def validate_foreign_keys():
     # Check LoanApplication.applicant_id
     bad = [r for r in apps_data if r["applicant_id"] not in applicant_ids]
     if bad:
-        print(f"✗ LoanApplication.applicant_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] LoanApplication.applicant_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ LoanApplication.applicant_id: all valid")
+        print(f"[OK] LoanApplication.applicant_id: all valid")
 
     # Check LoanApplication.product_id
     bad = [r for r in apps_data if r["product_id"] not in product_ids]
     if bad:
-        print(f"✗ LoanApplication.product_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] LoanApplication.product_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ LoanApplication.product_id: all valid")
+        print(f"[OK] LoanApplication.product_id: all valid")
 
     # Check Employment.applicant_id
     bad = [r for r in empls_data if r["applicant_id"] not in applicant_ids]
     if bad:
-        print(f"✗ Employment.applicant_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] Employment.applicant_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ Employment.applicant_id: all valid")
+        print(f"[OK] Employment.applicant_id: all valid")
 
     # Check IncomeRecord.applicant_id
     bad = [r for r in incomes_data if r["applicant_id"] not in applicant_ids]
     if bad:
-        print(f"✗ IncomeRecord.applicant_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] IncomeRecord.applicant_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ IncomeRecord.applicant_id: all valid")
+        print(f"[OK] IncomeRecord.applicant_id: all valid")
 
     # Check IncomeRecord.employment_id (nullable)
     bad = [r for r in incomes_data if r["employment_id"] and r["employment_id"] not in emp_ids]
     if bad:
-        print(f"✗ IncomeRecord.employment_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] IncomeRecord.employment_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ IncomeRecord.employment_id: all valid")
+        print(f"[OK] IncomeRecord.employment_id: all valid")
 
     # Check CreditFacility.applicant_id
     bad = [r for r in facilities_data if r["applicant_id"] not in applicant_ids]
     if bad:
-        print(f"✗ CreditFacility.applicant_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] CreditFacility.applicant_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ CreditFacility.applicant_id: all valid")
+        print(f"[OK] CreditFacility.applicant_id: all valid")
 
     # Check Document.application_id
     bad = [r for r in docs_data if r["application_id"] not in app_ids]
     if bad:
-        print(f"✗ Document.application_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] Document.application_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ Document.application_id: all valid")
+        print(f"[OK] Document.application_id: all valid")
 
     # Check AffordabilityCheck.application_id
     bad = [r for r in aff_data if r["application_id"] not in app_ids]
     if bad:
-        print(f"✗ AffordabilityCheck.application_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] AffordabilityCheck.application_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ AffordabilityCheck.application_id: all valid")
+        print(f"[OK] AffordabilityCheck.application_id: all valid")
 
     # Check Decision.application_id
     bad = [r for r in dec_data if r["application_id"] not in app_ids]
     if bad:
-        print(f"✗ Decision.application_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] Decision.application_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ Decision.application_id: all valid")
+        print(f"[OK] Decision.application_id: all valid")
 
     # Check RepaymentSchedule.application_id
     bad = [r for r in sch_data if r["application_id"] not in app_ids]
     if bad:
-        print(f"✗ RepaymentSchedule.application_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] RepaymentSchedule.application_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ RepaymentSchedule.application_id: all valid")
+        print(f"[OK] RepaymentSchedule.application_id: all valid")
 
     # Check ApplicationEvent.application_id
     bad = [r for r in evt_data if r["application_id"] not in app_ids]
     if bad:
-        print(f"✗ ApplicationEvent.application_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] ApplicationEvent.application_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ ApplicationEvent.application_id: all valid")
+        print(f"[OK] ApplicationEvent.application_id: all valid")
 
     # Check Disbursement.application_id
     bad = [r for r in dis_data if r["application_id"] not in app_ids]
     if bad:
-        print(f"✗ Disbursement.application_id: {len(bad)} invalid FKs")
+        print(f"[FAIL] Disbursement.application_id: {len(bad)} invalid FKs")
         all_ok = False
     else:
-        print(f"✓ Disbursement.application_id: all valid")
+        print(f"[OK] Disbursement.application_id: all valid")
 
     return all_ok
 
@@ -192,74 +192,74 @@ def validate_enums():
     valid_app_status = {"DRAFT", "SUBMITTED", "UNDER_REVIEW", "HOLD", "APPROVED", "REJECTED", "MANUAL_REVIEW", "APPROVED_READY_DISBURSEMENT", "DISBURSED", "CLOSED"}
     bad = [r for r in apps_data if r["current_status"] not in valid_app_status]
     if bad:
-        print(f"✗ LoanApplication.current_status: {len(bad)} invalid")
+        print(f"[FAIL] LoanApplication.current_status: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ LoanApplication.current_status: all valid")
+        print(f"[OK] LoanApplication.current_status: all valid")
 
     valid_emp_status = {"EMPLOYED", "SELF_EMPLOYED", "UNEMPLOYED", "RETIRED"}
     bad = [r for r in empls_data if r["employment_status"] not in valid_emp_status]
     if bad:
-        print(f"✗ Employment.employment_status: {len(bad)} invalid")
+        print(f"[FAIL] Employment.employment_status: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ Employment.employment_status: all valid")
+        print(f"[OK] Employment.employment_status: all valid")
 
     valid_verify = {"VERIFIED", "UNVERIFIED", "PENDING"}
     bad = [r for r in empls_data if r["verified_status"] not in valid_verify]
     if bad:
-        print(f"✗ Employment.verified_status: {len(bad)} invalid")
+        print(f"[FAIL] Employment.verified_status: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ Employment.verified_status: all valid")
+        print(f"[OK] Employment.verified_status: all valid")
 
     valid_income_type = {"SALARY", "BONUS", "COMMISSION", "SELF_EMPLOYED", "RENTAL", "OTHER"}
     bad = [r for r in incomes_data if r["income_type"] not in valid_income_type]
     if bad:
-        print(f"✗ IncomeRecord.income_type: {len(bad)} invalid")
+        print(f"[FAIL] IncomeRecord.income_type: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ IncomeRecord.income_type: all valid")
+        print(f"[OK] IncomeRecord.income_type: all valid")
 
     valid_facility = {"CREDIT_CARD", "PERSONAL_LOAN", "MORTGAGE", "AUTO_LOAN", "OTHER"}
     bad = [r for r in facilities_data if r["facility_type"] not in valid_facility]
     if bad:
-        print(f"✗ CreditFacility.facility_type: {len(bad)} invalid")
+        print(f"[FAIL] CreditFacility.facility_type: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ CreditFacility.facility_type: all valid")
+        print(f"[OK] CreditFacility.facility_type: all valid")
 
     valid_doc_type = {"ID_PROOF", "ADDRESS_PROOF", "INCOME_PROOF", "EMPLOYMENT_LETTER", "BANK_STATEMENT", "TAX_RETURN", "OTHER"}
     bad = [r for r in docs_data if r["document_type"] not in valid_doc_type]
     if bad:
-        print(f"✗ Document.document_type: {len(bad)} invalid")
+        print(f"[FAIL] Document.document_type: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ Document.document_type: all valid")
+        print(f"[OK] Document.document_type: all valid")
 
     valid_doc_status = {"PENDING", "SUBMITTED", "VERIFIED", "REJECTED", "MISSING"}
     bad = [r for r in docs_data if r["document_status"] not in valid_doc_status]
     if bad:
-        print(f"✗ Document.document_status: {len(bad)} invalid")
+        print(f"[FAIL] Document.document_status: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ Document.document_status: all valid")
+        print(f"[OK] Document.document_status: all valid")
 
     valid_aff_status = {"AFFORDABLE", "MARGINAL", "NOT_AFFORDABLE"}
     bad = [r for r in aff_data if r["affordability_status"] not in valid_aff_status]
     if bad:
-        print(f"✗ AffordabilityCheck.affordability_status: {len(bad)} invalid")
+        print(f"[FAIL] AffordabilityCheck.affordability_status: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ AffordabilityCheck.affordability_status: all valid")
+        print(f"[OK] AffordabilityCheck.affordability_status: all valid")
 
     valid_decision = {"APPROVE", "REJECT", "MANUAL_REVIEW"}
     bad = [r for r in dec_data if r["decision_outcome"] not in valid_decision]
     if bad:
-        print(f"✗ Decision.decision_outcome: {len(bad)} invalid")
+        print(f"[FAIL] Decision.decision_outcome: {len(bad)} invalid")
         all_ok = False
     else:
-        print(f"✓ Decision.decision_outcome: all valid")
+        print(f"[OK] Decision.decision_outcome: all valid")
 
     return all_ok
 
@@ -286,7 +286,7 @@ def validate_schedules():
     for app_id, scheds in schedules_by_app.items():
         app = app_by_id.get(app_id)
         if app and app["current_status"] != "APPROVED":
-            print(f"✗ {app_id}: has schedules but status is {app['current_status']}")
+            print(f"[FAIL] {app_id}: has schedules but status is {app['current_status']}")
             all_ok = False
 
     # Check principal reconciliation
@@ -303,12 +303,12 @@ def validate_schedules():
             bad_apps.append((app_id, total_principal, requested))
 
     if bad_apps:
-        print(f"✗ {len(bad_apps)} schedules with principal mismatch")
+        print(f"[FAIL] {len(bad_apps)} schedules with principal mismatch")
         for app_id, total, requested in bad_apps[:3]:
             print(f"  {app_id}: sum={float(total):.2f}, requested={float(requested):.2f}")
         all_ok = False
     else:
-        print(f"✓ {len(schedules_by_app)} applications: principal reconciled")
+        print(f"[OK] {len(schedules_by_app)} applications: principal reconciled")
 
     return all_ok
 
@@ -335,10 +335,10 @@ def validate_lifecycles():
             bad.append((app_id, aff["check_date"], dec["decision_date"]))
 
     if bad:
-        print(f"✗ {len(bad)} decisions dated before affordability checks")
+        print(f"[FAIL] {len(bad)} decisions dated before affordability checks")
         all_ok = False
     else:
-        print(f"✓ All decision dates >= affordability check dates")
+        print(f"[OK] All decision dates >= affordability check dates")
 
     # Check application status aligns with decision outcome
     mismatches = []
@@ -358,10 +358,10 @@ def validate_lifecycles():
             mismatches.append((app_id, "outcome=MANUAL_REVIEW but status=" + status))
 
     if mismatches:
-        print(f"✗ {len(mismatches)} status/decision outcome mismatches")
+        print(f"[FAIL] {len(mismatches)} status/decision outcome mismatches")
         all_ok = False
     else:
-        print(f"✓ All decision outcomes match application status")
+        print(f"[OK] All decision outcomes match application status")
 
     # Check event ordering
     events_by_app = {}
@@ -379,10 +379,10 @@ def validate_lifecycles():
                 break
 
     if bad_ordering:
-        print(f"✗ {bad_ordering} applications with out-of-order events")
+        print(f"[FAIL] {bad_ordering} applications with out-of-order events")
         all_ok = False
     else:
-        print(f"✓ All event dates in chronological order")
+        print(f"[OK] All event dates in chronological order")
 
     return all_ok
 
@@ -400,10 +400,10 @@ def main():
 
     print("\n" + "=" * 50)
     if all(results):
-        print("✓ All validations PASSED")
+        print("[OK] All validations PASSED")
         return 0
     else:
-        print("✗ Some validations FAILED")
+        print("[FAIL] Some validations FAILED")
         return 1
 
 if __name__ == "__main__":
