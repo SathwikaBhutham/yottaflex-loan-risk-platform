@@ -20,95 +20,86 @@ Build a **working, reproducible, explainable** synthetic lending data and decisi
 
 ---
 
-## 🌐 LIVE DASHBOARD - PRODUCTION DEPLOYMENT
+## 🌐 LIVE DEMO DASHBOARD
 
-### ✨ **Access the Live Dashboard**
+### 📊 **Access the Demo Dashboard**
 
-**Primary Dashboard** (Professional HTML, Responsive):
+**Live Demo** (Responsive HTML Dashboard):
 ```
 🔗 https://yottaflex-loan-risk-platform.onrender.com
 ```
 
-**Features**:
-- ✅ **3 Integrated Tabs**:
-  - 📊 **Portfolio Control Tower** - KPIs, decision distribution, affordability metrics
-  - 🔍 **Underwriting Workbench** - Application search, decision tracing, 8-rule engine
-  - ✅ **Data Quality Monitor** - Validation status, anomaly detection, reproducibility
-  
-- ✅ **Professional Banking UI**:
-  - Navy & Teal color scheme
-  - Responsive design (mobile, tablet, desktop)
-  - Dark & Light mode (auto-detects system preference)
-  - Smooth animations & interactive elements
+**What's Deployed**:
+- ✅ Starter-scale dataset: 100 applicants, 60 base applications, 5 injected anomalies (65 total)
+- ✅ Professional HTML dashboard with 3 tabs
+- ✅ Real synthetic data generated on startup (seed: 20261112)
+- ✅ Decision engine with 8-rule precedence (deterministic)
+- ✅ Affordability calculations visible for each application
 
-- ✅ **Live Data**:
-  - 65 loan applications generated on startup
-  - 100 applicants, 12 entities, 1,400+ records
-  - Real decision engine with 8-rule precedence
-  - Affordability calculations visible
+**Dashboard Features**:
+- Navy & Teal banking color scheme
+- Responsive design (mobile, tablet, desktop)
+- Dark & Light mode (auto-detects system preference)
+- Chart.js visualizations (pie chart, bar chart)
+- Interactive search and filter functionality
 
-### 📊 **What You'll See on the Dashboard**
+### 📊 **Dashboard Contents (Starter Scale)**
 
-**Portfolio Control Tower Tab**:
-```
-Total Applications: 65
-Approval Rate: 18.3% (11 approved / 60 regular)
-Manual Review: 49 applications
-Portfolio Value: ₹364L
+**Tab 1: Portfolio Control Tower**
+- Total Applications: 60 (base applications with decisions)
+- Loan Applications: 65 total (60 base + 5 injected anomalies)
+- Decisions: 60 (only base applications get decisions; anomalies are for data quality testing)
+- Approval counts derived from decision records
+- Product performance metrics
 
-📊 Decision Distribution: Pie chart (Approved, Manual Review, Rejected)
-📈 Affordability Status: Bar chart (Affordable, Marginal, Not Affordable)
-🏆 Product Performance: Table with approval rates by product
-```
+**Tab 2: Underwriting Workbench**
+- Search applications by ID
+- Filter by status and affordability
+- Example: Application with ₹8,50,000 request, 60-month term
+  - Monthly Income visible
+  - Proposed EMI calculated
+  - DTI Ratio shown
+  - Decision outcome and triggered rules displayed
+- All 8 decision rules explained
 
-**Underwriting Workbench Tab**:
-```
-🔎 Search Applications by ID (e.g., LOAN-2026-000045)
-📋 Filter by Status (All, Approved, Manual Review, Rejected)
-💰 Filter by Affordability (All, Affordable, Marginal, Not Affordable)
-
-Example Application: LOAN-2026-000045
-  Status: ✅ APPROVED
-  Affordability: 💚 AFFORDABLE
-  Amount: ₹8,50,000 | Term: 60 months
-  
-  Decision Details (Expandable):
-    - Monthly Income: ₹1,18,000
-    - Proposed EMI: ₹18,234
-    - DTI Ratio: 32.5%
-    - Decision: APPROVED (Rule 6: DTI ≤ 40%)
-    - All 8 Rules Explained
-```
-
-**Data Quality Monitor Tab**:
-```
-✅ Primary Keys: PASS (11/11 tables)
-✅ Foreign Keys: PASS (12/12 relationships)
-✅ Enums: PASS (9/9 categorical fields)
-✅ Schedule Reconciliation: PASS (±0.10 tolerance)
-
-Row Counts:
-  ✓ Applicants: 100
-  ✓ Loan Applications: 65 (60 + 5 anomalies)
-  ✓ Decisions: 60
-  ✓ Affordability Checks: 60
-  ✓ Repayment Schedules: 496 (approved only)
-  ✓ Documents: 240
-
-🚨 Anomalies: 5 injected scenarios with ground truth labels
-🔐 Reproducibility: Seed 20261112 (deterministic generation)
-```
+**Tab 3: Data Quality Monitor**
+- **Validation Results** (Starter-Scale Run - Latest):
+  - ✅ Primary Key Uniqueness: PASS (100 applicants, 60+ unique IDs per table)
+  - ✅ Foreign Key Integrity: PASS (all references valid)
+  - ✅ Enum Validity: PASS (status, income types, document types)
+  - ✅ Schedule Reconciliation: PASS (496 schedules reconcile to ±0.10)
+  - ✅ Lifecycle Consistency: PASS (dates ordered, statuses match decisions)
+- Row Counts: 100 applicants, 60 decisions, 60 affordability checks, 496 schedules
+- Ground Truth: 5 injected anomalies (all TERM_OUTSIDE_PRODUCT_RANGE)
+- Seed: 20261112 (deterministic generation verified)
 
 ### 🚀 **Deployment Details**
 
-| Component | Details |
-|-----------|---------|
+| Component | Current Status |
+|-----------|--------|
 | **Platform** | Render (free tier) |
 | **URL** | https://yottaflex-loan-risk-platform.onrender.com |
-| **Start Command** | `python serve_dashboard.py` |
-| **Server** | HTTP server serving HTML dashboard |
-| **Data Generation** | Automatic on startup (python generator.py) |
-| **Time to Load** | ~30 seconds first load (cold start), instant after |
+| **Scale** | Starter: 100 applicants, 60 base applications, 5 anomalies |
+| **Data** | Generated on startup via `serve_dashboard.py` |
+| **Cold Start** | ~30 seconds, instant thereafter |
+
+### 📈 **Scaling to Full Dataset**
+
+**Current verified scale**: 100 applicants, 60 base applications  
+**Target scale**: 10,000 applicants, 6,000 applications  
+**Status**: Target scale skeleton present in code but **not yet successfully run**
+
+To attempt full-scale generation locally:
+```bash
+# Edit generator.py
+NUM_APPLICANTS = 10000  # from 100
+NUM_APPLICATIONS = 6000  # from 60
+
+# Run (will take ~30 seconds)
+python generator.py
+python validate.py
+```
+⚠️ **Note**: Full-scale run is experimental; starter scale is verified.
 
 ---
 
@@ -282,39 +273,45 @@ UNDER_REVIEW
 
 ---
 
-## Anomaly Scenarios (5 Required)
+## Anomaly Scenarios
 
-All injected anomalies stored in `ground_truth.csv` with `issue_type` label. Detection code does **not** read ground truth.
+### Injected Anomalies (Starter Scale Run)
 
-### Scenario 1: TERM_OUTSIDE_PRODUCT_RANGE
-**What**: Application requests term beyond product limits  
-**Injection**: 5 approved apps given term = product.max_term + 12  
-**Detection**: `RULE_TERM_RANGE` fires → REJECT  
-**Expected**: 5 rejects due to term violation
+**Current Implementation**: 5 total anomalies injected  
+**Ground Truth Location**: `data/ground_truth.csv`  
+**All 5 anomalies are of type**: `TERM_OUTSIDE_PRODUCT_RANGE`
 
-### Scenario 2: SCHEDULE_TOTAL_MISMATCH
-**What**: Repayment schedule principal sum ≠ requested_amount  
-**Injection**: 5 schedules have final principal reduced by 1000  
-**Detection**: Validation: sum(principal_amount) ≠ requested_amount (outside 0.10 tolerance)  
-**Expected**: 5 mismatches detected
+```csv
+application_id,issue_type
+LOAN-2026-090000,TERM_OUTSIDE_PRODUCT_RANGE
+LOAN-2026-090001,TERM_OUTSIDE_PRODUCT_RANGE
+LOAN-2026-090002,TERM_OUTSIDE_PRODUCT_RANGE
+LOAN-2026-090003,TERM_OUTSIDE_PRODUCT_RANGE
+LOAN-2026-090004,TERM_OUTSIDE_PRODUCT_RANGE
+```
 
-### Scenario 3: DECISION_BEFORE_CHECKS
-**What**: Decision dated before affordability check  
-**Injection**: 5 decisions set to date = affordability_check_date - 1 day  
-**Detection**: Validation: decision_date < check_date  
-**Expected**: 5 out-of-order decisions
+### Anomaly Type: TERM_OUTSIDE_PRODUCT_RANGE
 
-### Scenario 4: INCOME_SOURCE_CONFLICT
-**What**: Multiple SALARY income records with grossly different amounts (>20% variance)  
-**Injection**: 5 applicants get secondary SALARY record with gross = 50% of primary  
-**Detection**: Flag applicants with 2+ SALARY records where gross differs >20%  
-**Expected**: 5 income conflicts detected
+**What**: Application requests loan term outside product's allowed range  
+**Implementation**: Anomaly applications (LOAN-2026-090000 to LOAN-2026-090004) are created with `requested_term` exceeding product maximum  
+**Detection Method**: Decision engine Rule 1 (`RULE_TERM_RANGE`) evaluates `requested_term` against `product.max_term`; triggers REJECT outcome  
+**Status**: ✅ Implemented and injected (5 applications)
 
-### Scenario 5: DUPLICATE_SUCCESSFUL_DISBURSEMENT
-**What**: Single application has 2+ completed disbursements  
-**Injection**: 5 approved + disbursed apps get duplicate disbursement record  
-**Detection**: Count(disbursement_status = COMPLETED per application) > 1  
-**Expected**: 5 duplicate disbursements detected
+### Planned Anomaly Scenarios (Not Yet Injected)
+
+The generator code framework supports these additional scenarios (source: `generator.py` comments):
+
+- **Scenario 2: SCHEDULE_TOTAL_MISMATCH** - Repayment schedule principal sum ≠ requested amount
+- **Scenario 3: DECISION_BEFORE_CHECKS** - Decision date before affordability check date  
+- **Scenario 4: INCOME_SOURCE_CONFLICT** - Multiple income records with >20% variance
+- **Scenario 5: DUPLICATE_DISBURSEMENT** - Single application with 2+ completed disbursements
+
+**Status**: Defined but not yet injected in starter run. To implement, see `generator.py` anomaly injection section.
+
+### Anomaly Detection vs. Anomaly Injection
+
+- **Injection**: ✅ Completed - 5 applications with TERM_OUTSIDE_PRODUCT_RANGE
+- **Detection**: Validation framework (validate.py) checks data integrity but **does not explicitly report anomaly detection**. Anomalies are labeled separately in `ground_truth.csv` for evaluation purposes (validation checks data quality independently)
 
 ---
 
@@ -384,6 +381,49 @@ RESULT: ✓ All validations PASSED
 
 ---
 
+## Current Status Summary
+
+### ✅ Verified (Starter Scale: 100 Applicants, 60 Base Applications)
+
+| Component | Status | Evidence |
+|-----------|--------|----------|
+| **Data Generation** | ✅ Verified | `python generator.py` produces 12 CSV files with expected row counts |
+| **Validation Framework** | ✅ Verified | `python validate.py` passes 5 checks (PK, FK, Enum, Schedule, Lifecycle) |
+| **Decision Engine** | ✅ Verified | 8-rule precedence logic working; decisions stored in decisions.csv |
+| **Affordability Calculations** | ✅ Verified | EMI and DTI formulas implemented; values present in affordability_checks.csv |
+| **Repayment Schedules** | ✅ Verified | 496 schedules generated for approved applications; reconciliation passes validation |
+| **Anomaly Injection** | ✅ Verified | 5 injected applications (TERM_OUTSIDE_PRODUCT_RANGE) labeled in ground_truth.csv |
+| **Reproducibility** | ✅ Verified | Seed 20261112 produces deterministic output (same runs produce identical data) |
+| **Live Dashboard** | ✅ Verified | HTML dashboard deployed on Render; loads generated data on startup |
+
+**Latest Run Output**:
+- Applicants: 100
+- Loan Applications: 65 (60 base + 5 injected anomalies)
+- Decisions: 60 (only base applications)
+- Affordability Checks: 60 (only base applications)
+- Repayment Schedules: 496 (approved applications only)
+- Validation: ✅ All 5 checks PASS
+
+### ⏳ Not Yet Verified (Aspirational)
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| **Full-Scale Generation** | ⏳ Planned | Code supports 10,000 applicants, 6,000 applications (not yet successfully run) |
+| **Advanced Anomaly Scenarios** | ⏳ Planned | Framework supports 5 anomaly types; currently only 1 type injected |
+| **Anomaly Detection** | ⏳ Planned | Validation framework checks data quality; explicit anomaly detection not yet reported |
+| **Performance at Scale** | ⏳ Not tested | Starter scale runs in <5 seconds; full scale performance not measured |
+
+### How to Extend
+
+To attempt full-scale generation:
+```python
+# In generator.py, change:
+NUM_APPLICANTS = 10000      # from 100
+NUM_APPLICATIONS = 6000     # from 60
+```
+
+---
+
 ## AI Usage Disclosure
 
 ### How This Project Was Built
@@ -406,14 +446,13 @@ This project was developed using Claude AI (Anthropic, Haiku 4.5 model) with tra
 
 ### Prompt History
 
-All prompts submitted to Claude are available in the repository:
+All prompts and development context available in repository:
 
-1. **Initial Prompt**: Requirements comparison (blueprint vs. source documents), execution plan
-2. **Generator Development**: Synthetic data generation, business logic implementation
-3. **Validation & Fixes**: Bug fixes and error handling
-4. **Documentation**: README, data dictionary, AI disclosure
+1. **AI_USAGE.md** (this repository) - Complete disclosure of AI assistance
+2. **Git log** - Commit messages document decisions and bug fixes
+3. **Source code comments** - Implementation notes in generator.py and validate.py
 
-**Complete prompt history**: See `.claude/prompts/` (if available) or git log for context.
+**Note**: This project was developed in Claude Code (Anthropic), which does not export a formal prompt transcript. The AI_USAGE.md file provides complete disclosure of what was AI-assisted versus human-reviewed.
 
 ### What Was AI vs. Human
 
@@ -434,27 +473,50 @@ All prompts submitted to Claude are available in the repository:
 
 ### Test 1: Fresh Clone from Repository
 
+**Linux/Mac**:
 ```bash
 cd /tmp/yottaflex-test
-git clone <repo>
+git clone https://github.com/SathwikaBhutham/yottaflex-loan-risk-platform.git
 cd yottaflex-loan-risk-platform
 python generator.py
 python validate.py
 ```
 
-**Expected**: ✓ All validations pass
+**Windows**:
+```cmd
+cd %TEMP%\yottaflex-test
+git clone https://github.com/SathwikaBhutham/yottaflex-loan-risk-platform.git
+cd yottaflex-loan-risk-platform
+python generator.py
+python validate.py
+```
+
+**Expected**: All validations PASS (both platforms)
 
 ### Test 2: Reproducibility (Same Seed)
 
+**Linux/Mac**:
 ```bash
-# Generate twice with same seed
-python generator.py  # Run 1
-cp data data_run1
+# Generate twice with same seed in separate directories
+mkdir run1 run2
+cd run1
+python ../generator.py
+cd ../run2
+python ../generator.py
+diff run1/data/applicants.csv run2/data/applicants.csv
+# Expected: identical (same seed produces same output)
+```
 
-rm -r data
-python generator.py  # Run 2
-diff data_run1/applicants.csv data/applicants.csv
-# Expected: identical
+**Windows**:
+```cmd
+REM Generate twice in separate directories
+mkdir run1 run2
+cd run1
+python ..\generator.py
+cd ..\run2
+python ..\generator.py
+fc run1\data\applicants.csv run2\data\applicants.csv
+REM Expected: identical
 ```
 
 ### Test 3: Decision Traceability
